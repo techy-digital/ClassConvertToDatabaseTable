@@ -20,7 +20,7 @@ abstract class DatabaseTableDao extends MysqliDb
 
     private $TableName;
 
-    private $Rows;
+    private $Column;
 
     private $value;
 
@@ -31,7 +31,7 @@ abstract class DatabaseTableDao extends MysqliDb
         $this->IEntity = $IEntity;
         $this->_instance = $this->IEntity;
 
-        self::createRowsAndTableName($TableName);
+        self::createColumnAndTableName($TableName);
 
 
         if (!$this->database->tableExists($this->TableName)) {
@@ -42,7 +42,7 @@ abstract class DatabaseTableDao extends MysqliDb
             $this->rawQuery($sql);
         }
 
-        return $this->Rows;
+        return $this->Column;
     }
 
     public function insert($array = array())
@@ -103,11 +103,11 @@ abstract class DatabaseTableDao extends MysqliDb
         }
     }
 
-    private function createRowsAndTableName($TableName)
+    private function createColumnAndTableName($TableName)
     {
         $i = 0;
         foreach ($this->IEntity as $key => $value) {
-            $this->Rows[$i] = $key;
+            $this->Column[$i] = $key;
             $i++;
         }
 
@@ -117,21 +117,21 @@ abstract class DatabaseTableDao extends MysqliDb
             $this->TableName = $TableName;
         }
 
-        self::createRows();
+        self::createColumn();
 
     }
 
-    private  function createRows()
+    private  function createColumn()
     {
         //  will to begin from 1 because id  be first
-        for ($i = 1; $i < count($this->Rows); $i++) {
+        for ($i = 1; $i < count($this->Column); $i++) {
 
-            if ($i == (count($this->Rows) - 1)) {
-                $this->value = $this->value . "" . $this->Rows[$i] . " " . "TEXT";
+            if ($i == (count($this->Column) - 1)) {
+                $this->value = $this->value . "" . $this->Column[$i] . " " . "TEXT";
 
             } else {
 
-                $this->value = $this->value . "" . $this->Rows[$i] . " " . "TEXT" . ",";
+                $this->value = $this->value . "" . $this->Column[$i] . " " . "TEXT" . ",";
             }
 
         }

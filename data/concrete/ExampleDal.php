@@ -13,11 +13,11 @@ include_once ROOT_PATH.'/data/abstract/IDatabaseTableDao.php';
 class ExampleDal extends DatabaseTableDao implements IDatabaseTableDao
 {
 
-    private $Rows;
+    private $Column;
 
     public function __construct()
     {
-        $this->Rows = parent::CreateTable(Container::getInstance(new Message()));
+        $this->Column = parent::CreateTable(Container::getInstance(new Message()));
     }
 
     public function getMessageToId($id)
