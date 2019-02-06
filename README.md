@@ -2,9 +2,9 @@
 
 # Class Convert To Mysql Database Table
 
-Php Oluşturulan sınıfları database tablosuna dönüştüren ve bunlara kullanmaya olanak sağlayan yapı.
-Bir tabloya erişim sağlamak için aşağıdaki gibi sınıfımız olduğunu varsayalım.
+This artifact is class properties / database tables converter and the tables provide to use
 
+have a class like below
 <pre><code>
 class Message {
     protected $Id;
@@ -12,17 +12,19 @@ class Message {
 }
 </code></pre>
 
-Bu sınıfın bir database nesnesi olacağını belirtmek için IEntity arayüzü ile sarmalıyoruz.
+this class is implement with  IEntitiy interface for will be a database object 
+
 <pre><code>
 class Message implements IEntity {
     protected $Id;
     protected $Name;
 }
 </code></pre>
-Sonrasında database'e erişim sağlayacak sınıfımızı oluşturalım ve bunları aşağıdaki gibi sarmayalım.
+
+Create a class to access database and dress up
 
 <pre><code>
-class ClassNameDal extends extends DatabaseTableDao implements IDatabaseTableDao{
+class ClassNameDal extends DatabaseTableDao implements IDatabaseTableDao{
 
     private $Column;
 
@@ -46,18 +48,19 @@ class ClassNameDal extends extends DatabaseTableDao implements IDatabaseTableDao
 
 }
 </code></pre>
-Abstract sınıftan dönen sütun adlarınıda $Column değişkeninde tutmuş olacağız.
+ Columns returned from abstract class keep to <code>$Column</code> variable
 
-DatabaseTableDao.php adlı dosyanın içerisindeki
-Abstract sınıfının içerisinde
+
+
 <pre><code>$this->select(array("columnName => Value")) </code></pre>
 
-şeklinde ve buna benzer methodlarıda kullanabiliriz
+like this and you can use similar methods in DatabaseTableDao.php 
+
+also you can access to MysqliDb class methods in ClassNameDdal class
 
 
-Ayrıca ClassNameDal Sınıf içerisinden MysqliDb sınıfınında methodlarına erişim sağlanılabilir.
+we used ThingEngineer's MysqliDb class 
+Ref: https://github.com/ThingEngineer/PHP-MySQLi-Database-Class
 
 
-ThingEngineer'in MysqliDb sınıfı kullanılmış.
-Referans: https://github.com/ThingEngineer/PHP-MySQLi-Database-Class
 
